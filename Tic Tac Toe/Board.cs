@@ -70,14 +70,25 @@ namespace Tic_Tac_Toe
 
         private void getPlayerInput(State state)
         {
-            Console.Write("Input target column (1-3): ");
-            int targetColumn = getTarget() - 1;
+            while (true)
+            {
+                Console.Write("Input target column (1-3): ");
+                int targetColumn = getTarget() - 1;
 
-            Console.Write("Input target row (1-3): ");
-            int targetRow = getTarget() - 1;
+                Console.Write("Input target row (1-3): ");
+                int targetRow = getTarget() - 1;
 
-            // Set target to the input state.
-            boardArray[targetColumn + (targetRow * 3)] = state;
+                // Set target to the input state.
+                int target = targetColumn + (targetRow * 3);
+
+                if (boardArray[target] == State.EMPTY)
+                {
+                    boardArray[targetColumn + (targetRow * 3)] = state;
+                    break;
+                }
+                else
+                    Console.WriteLine("Error: Space is already filled.");
+            }
         }
 
         private int getTarget()
@@ -113,6 +124,7 @@ namespace Tic_Tac_Toe
 
         private void getComputerInput(State state)
         {
+            Console.WriteLine("The computer is taking its turn...");
             // For now, just fill in the first empty spot starting from the top left.
             for (int i = 0; i < 9; i++)
             {
